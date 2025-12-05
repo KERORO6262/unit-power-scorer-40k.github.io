@@ -179,8 +179,8 @@ function editWeapon(i) {
     document.getElementById('wS').value = w.s;
     document.getElementById('wAP').value = w.ap;
     document.getElementById('wD').value = w.d;
-    document.getElementById('kwSus').value = w.sus;
-    document.getElementById('kwCrit').value = w.crit;
+    document.getElementById('kwSus').value = (w.sus !== undefined && w.sus !== null) ? w.sus : 0;
+    document.getElementById('kwCrit').value = (w.crit !== undefined && w.crit !== null) ? w.crit : 6;
     document.getElementById('kwLethal').checked = w.lethal;
     document.getElementById('kwDev').checked = w.dev;
     document.getElementById('kwTwin').checked = w.twin;
@@ -579,3 +579,4 @@ function updateTooltipPosition(target, tooltip) {
     tooltip.style.top = `${top}px`;
     tooltip.style.left = `${left}px`;
 }
+
