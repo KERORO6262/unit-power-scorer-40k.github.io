@@ -104,6 +104,7 @@ function calcWeaponPower(w, u = null) {
     // 暴擊率通常為 1/6
     let weaponSus = w.sus || 0;
     let buffSus = buffs.sus || 0;
+    // 取較高者 (覆蓋型邏輯)
     let effectiveSus = Math.max(weaponSus, buffSus);
 
     let critProb = (7 - (w.crit || 6)) / 6.0;
@@ -132,10 +133,10 @@ function calcWeaponPower(w, u = null) {
     let kwBonus = 1.0;
 
     // Lethal Hits (致死): 跳過高 T 值造傷檢定，對打坦克極為重要
-    if (w.lethal) kwBonus *= 1.25;
+    if (w.lethal || buffs.lethal) kwBonus *= 1.25;
 
     // Devastating Wounds (毀滅): 無視護甲與特保，10版最強關鍵詞之一
-    if (w.dev) kwBonus *= 1.4;
+    if (w.dev || buffs.dev) kwBonus *= 1.4;
 
     // Twin-Linked (雙連): 重骰造傷，大幅提升穩定性
     if (w.twin) kwBonus *= 1.25;
